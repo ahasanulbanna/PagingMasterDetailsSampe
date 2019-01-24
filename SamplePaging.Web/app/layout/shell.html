@@ -1,0 +1,50 @@
+﻿<div ng-controller="ShellController as vm">
+    <div id="splash-page" data-ng-show="showSplash" class="dissolve-animation">
+        <div class="page-splash">
+            <!--<div class="page-splash-message">
+               Itolk
+            </div>-->
+            <div class="progress progress-striped active page-progress-bar">
+                <div class="bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <header class="clearfix">
+        <div ng-include="'app/layout/topNavigation.html'"></div>
+        <a href="#menu-toggle" id="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+    </header>
+
+    <section class="main-container">
+        <work-spinner>
+            <div class="page-splash dissolve-animation">
+                <div data-mp-spinner="{{vm.spinnerOptions}}"></div>
+                <div class="page-splash-message page-splash-message-subtle">{{vm.busyMessage}}</div>
+            </div>
+        </work-spinner>
+        <div id="wrapper" ng-class="{'toggled': vm.check}">
+            <!-- Left SideBar Navigation -->
+            <div ng-include="'app/layout/leftSideBarNavigation.html'"></div>
+            <!-- /Left SideBar Navigation -->
+            <div ng-view id="page-content-wrapper" class="view-animate shuffle-animation">
+
+            </div>
+        </div>
+
+        <footer class="footer-section">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>
+                        <span class="footer-right-powered">Powered by </span><span class="footer-right-text">
+                       
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<!--SideNavBar Toggle-->
+
+

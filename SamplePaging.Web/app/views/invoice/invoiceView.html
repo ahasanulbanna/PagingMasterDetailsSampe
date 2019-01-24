@@ -1,0 +1,58 @@
+﻿<div class="container-fluid">
+    <div class="row ">
+        <div class="col-md-12">
+            <div class="table-wrapper table-responsive">
+                <h2 style="text-align:center;">Customer Information</h2>
+                <table class="table table-hover table-striped">
+                    <tbody>
+                        <tr>
+                            <td>Customer Name</td>
+                            <td>{{vm.invoice.name}}</td>
+                            <td>Invoice No</td>
+                            <td>{{vm.invoice.invoiceNo}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email Address</td>
+                            <td>{{vm.invoice.email}}</td>
+                            <td>Phone No.</td>
+                            <td>{{vm.invoice.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td>Date</td>
+                            <td>{{vm.invoice.date | date: 'dd-MMMM-yyyy'}}</td>
+                            <td>Grand Total</td>
+                            <td>{{vm.invoice.grandTotal}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br />
+                <h2 style="text-align:center;">Invoice Details Information</h2>
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>SL NO</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Rate</th>
+                            <th>Tota Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="invoiceDetail in vm.invoice.invoiceDetails">
+                            <td>{{$index+1}}</td>
+                            <td>{{invoiceDetail.itemName}}</td>
+                            <td>{{invoiceDetail.quantity}}</td>
+                            <td>{{invoiceDetail.rate}}</td>
+                            <td>{{invoiceDetail.quantity * invoiceDetail.rate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+           

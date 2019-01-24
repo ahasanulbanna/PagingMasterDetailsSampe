@@ -1,0 +1,49 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <header class="page-header">
+                        <h2 class="warning page-header-item">{{vm.title}}</h2>
+                    </header>
+                    <form name="vm.courseForm">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="courseCode" class="custom-label">Code</label>
+                                    <input type="text" id="courseCode" class="form-control custom-form-control" ng-model="vm.course.courseCode" name="courseCode" ng-maxlength="6" required />
+                                    <p ng-show="vm.courseForm.courseCode.$error.required" class="help-block errormsg">Course Code is required</p>
+                                    <p ng-show="vm.courseForm.courseCode.$error.maxlength" class="help-block errormsg">Maximum character 6</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name" class="custom-label"> Name</label>
+                                    <input type="text" id="name" class="form-control custom-form-control" ng-model="vm.course.name" name="name" ng-maxlength="50" required />
+                                    <p ng-show="vm.courseForm.name.$error.required" class="help-block errormsg">Exam Type is required</p>
+                                    <p ng-show="vm.courseForm.name.$error.maxlength" class="help-block errormsg">Maximum character 50</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="description" class="custom-label">Description</label>
+                                    <textarea type="text" id="description" class="form-control custom-form-control" ng-model="vm.course.description" name="description" ng-maxlength="150" required />
+                                    <p ng-show="vm.courseForm.description.$error.required" class="help-block errormsg">Description  is required</p>
+                                    <p ng-show="vm.courseForm.description.$error.maxlength" class="help-block errormsg">Maximum Character 150</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ng-disabled="vm.courseForm.$invalid"><span class="glyphicon glyphicon-floppy-disk"></span> {{vm.saveButtonText}}</button>
+                            <button type="button" class="btn custom-btn btn-warning" ng-click="vm.close()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

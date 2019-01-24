@@ -1,0 +1,175 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <header class="page-header">
+                        <h2 class="warning page-header-item">{{vm.title}}</h2>
+                    </header>
+                    <form name="vm.invoiceForm">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name" class="custom-label"> Name</label>
+                                    <input type="text" id="name" class="form-control custom-form-control" ng-model="vm.invoice.name" name="name" ng-maxlength="50" required />
+                                    <p ng-show="vm.invoiceForm.name.$error.required" class="help-block errormsg">Name Type is required</p>
+                                    <p ng-show="vm.invoiceForm.name.$error.maxlength" class="help-block errormsg">Maximum character 50</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="email" class="custom-label">Email</label>
+                                    <input type="email" id="departmentCode" class="form-control custom-form-control"
+                                           ng-model="vm.invoice.email"
+                                           ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]*\.([a-z]{2,4})$/"
+                                           name="email"
+                                           ng-maxlength="50"
+                                           required />
+                                    <p ng-show="vm.invoiceForm.email.$error.required" class="help-block errormsg">Email is required</p>
+                                    <p ng-show="vm.invoiceForm.email.$error.maxlength" class="help-block errormsg">Maximum character 50</p>
+                                    <p ng-show="vm.invoiceForm.email.$error.pattern" class="help-block errormsg">Wrong email address</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="phone" class="custom-label">Phone</label>
+                                    <input type="text" id="phone" class="form-control custom-form-control" ng-model="vm.invoice.phone" name="phone" ng-maxlength="16" required />
+                                    <p ng-show="vm.invoiceForm.phone.$error.required" class="help-block errormsg">Phone  is required</p>
+                                    <p ng-show="vm.invoiceForm.phone.$error.maxlength" class="help-block errormsg">Maximum Character 16</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="invoiceNo" class="custom-label">Invoice No</label>
+                                    <input type="number" id="invoiceNo" class="form-control custom-form-control" ng-model="vm.invoice.invoiceNo" name="invoiceNo" ng-maxlength="16" required />
+                                    <p ng-show="vm.invoiceForm.invoiceNo.$error.required" class="help-block errormsg">Invoice No. is required</p>
+                                    <p ng-show="vm.invoiceForm.invoiceNo.$error.maxlength" class="help-block errormsg">Maximum Character 16</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="grandTotal" class="custom-label">Grand Total</label>
+                                    <input type="number" id="grandTotal" class="form-control custom-form-control" ng-model="vm.invoice.grandTotal" name="grandTotal" required />
+                                    <p ng-show="vm.invoiceForm.grandTotal.$error.required" class="help-block errormsg">Grand Total is required</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="invoiceDate" class="custom-label">Date</label>
+                                    <div class='input-group date' id='datetimepicker1'>
+                                        <input type="text" class="form-control" id="invoiceDate" name="invoiceDate" uib-datepicker-popup="{{format}}" ng-model="vm.invoice.date" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                    <p ng-show="vm.invoiceForm.invoiceDate.$error.required" class="help-block errormsg">Date is required</p>
+                                </div>
+                            </div>
+                            {{vm.invoice.date}}
+                        </div>
+                    </form>
+                    <hr />
+                    <form name="vm.itemForm">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="itemName" class="custom-label"> Name</label>
+                                    <input type="text" id="itemName" class="form-control custom-form-control" ng-model="vm.invoiceDetail.itemName" name="itemName" ng-maxlength="50" required />
+                                    <p ng-show="vm.itemForm.itemName.$error.required" class="help-block errormsg">Item Name is required</p>
+                                    <p ng-show="vm.itemForm.itemName.$error.maxlength" class="help-block errormsg">Maximum character 50</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="quantity" class="custom-label"> Quantity</label>
+                                    <input type="number" id="quantity" class="form-control custom-form-control" ng-model="vm.invoiceDetail.quantity" name="quantity" ng-maxlength="50" required />
+                                    <p ng-show="vm.itemForm.quantity.$error.required" class="help-block errormsg"> Quantity is required</p>
+                                    <p ng-show="vm.itemForm.quantity.$error.maxlength" class="help-block errormsg">Maximum character 50</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="rate" class="custom-label"> Rate</label>
+                                    <input type="number" id="rate" class="form-control custom-form-control" ng-model="vm.invoiceDetail.rate" name="rate" ng-maxlength="50" required />
+                                    <p ng-show="vm.itemForm.rate.$error.required" class="help-block errormsg">Rate is required</p>
+                                    <p ng-show="vm.itemForm.rate.$error.maxlength" class="help-block errormsg">Maximum character 50</p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" class="btn custom-btn btn-info" style="float:right;" ng-click="vm.add()" ng-disabled="vm.itemForm.$invalid"><span class="glyphicon glyphicon-plus"></span> {{vm.addButtonText}}</button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper table-responsive" ng-if="vm.invoiceDetails.length > 0">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>SL NO</th>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Rate</th>
+                                    <th>Tota Price</th>
+                                    <th class="text-right">Edit</th>
+                                    <th class="text-right">Delete</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="invoiceDetail in vm.invoiceDetails">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{invoiceDetail.itemName}}</td>
+                                    <td>{{invoiceDetail.quantity}}</td>
+                                    <td>{{invoiceDetail.rate}}</td>
+                                    <td>{{invoiceDetail.quantity * invoiceDetail.rate}}</td>
+                                    <td class="text-right">
+                                        <a class="btn custom-btn btn-edit custom-btn-primary btn-xs" ng-click="vm.update($index, invoiceDetail)"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit"></span></a>
+                                    </td>
+                                    <td class="text-right">
+                                        <a class="btn custom-btn btn-delete btn-danger btn-xs" style="cursor:pointer" ng-confirmation-click="vm.remove(index)"
+                                           ng-confirmation-message="Do you want to delete Item"
+                                           ng-confirmation-title="Delete Item"
+                                           ng-confirmation-yes-text="Yes"
+                                           ng-confirmation-cancel-text="No"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete role"></span></a>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr />
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="pay" class="custom-label">Pay</label>
+                            <input type="number" id="pay" class="form-control custom-form-control" ng-model="vm.invoice.pay" name="pay" required />
+                            <p ng-show="vm.invoiceForm.pay.$error.required" class="help-block errormsg">Grand Total is required</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="due" class="custom-label">Due</label>
+                            <input type="number" id="due" class="form-control custom-form-control" ng-model="vm.invoice.due" name="due" required />
+                            <p ng-show="vm.invoiceForm.due.$error.required" class="help-block errormsg">Due is required</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" class="btn custom-btn btn-info" ng-click="vm.save()" ng-disabled="vm.invoiceForm.$invalid"><span class="glyphicon glyphicon-floppy-disk"></span> {{vm.saveButtonText}}</button>
+                            <button type="button" class="btn custom-btn btn-warning" ng-click="vm.close()"><span class="glyphicon glyphicon-remove-circle"></span> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
