@@ -1,58 +1,132 @@
-﻿<div class="container-fluid">
-    <div class="row ">
+﻿
+<!--Invoice View-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="invoice-title">
+                <h2>Invoice</h2><h3 class="pull-right">Order #{{vm.invoice.invoiceNo}}</h3>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-6">
+                    <address>
+                        <strong>Billed To:</strong><br>
+                        Ahasanul Banna<br>
+                        1234 Main<br>
+                        Apt. 4B<br>
+                        Springfield, ST 54321
+                    </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <address>
+                        <strong>Shipped To:</strong><br>
+                        {{vm.invoice.name}}<br>
+                        {{vm.invoice.email}}<br>
+                        {{vm.invoice.phone}}
+                    </address>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <address>
+                        <strong>Payment Method:</strong><br>
+                        Visa ending **** 4242<br>
+                        jsmith@email.com
+                    </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <address>
+                        <strong>Order Date:</strong><br>
+                        {{vm.invoice.date | date: 'dd-MMMM-yyyy'}}<br><br>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-12">
-            <div class="table-wrapper table-responsive">
-                <h2 style="text-align:center;">Customer Information</h2>
-                <table class="table table-hover table-striped">
-                    <tbody>
-                        <tr>
-                            <td>Customer Name</td>
-                            <td>{{vm.invoice.name}}</td>
-                            <td>Invoice No</td>
-                            <td>{{vm.invoice.invoiceNo}}</td>
-                        </tr>
-                        <tr>
-                            <td>Email Address</td>
-                            <td>{{vm.invoice.email}}</td>
-                            <td>Phone No.</td>
-                            <td>{{vm.invoice.phone}}</td>
-                        </tr>
-                        <tr>
-                            <td>Date</td>
-                            <td>{{vm.invoice.date | date: 'dd-MMMM-yyyy'}}</td>
-                            <td>Grand Total</td>
-                            <td>{{vm.invoice.grandTotal}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <br />
-                <h2 style="text-align:center;">Invoice Details Information</h2>
-                <table class="table table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th>SL NO</th>
-                            <th>Name</th>
-                            <th>Quantity</th>
-                            <th>Rate</th>
-                            <th>Tota Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="invoiceDetail in vm.invoice.invoiceDetails">
-                            <td>{{$index+1}}</td>
-                            <td>{{invoiceDetail.itemName}}</td>
-                            <td>{{invoiceDetail.quantity}}</td>
-                            <td>{{invoiceDetail.rate}}</td>
-                            <td>{{invoiceDetail.quantity * invoiceDetail.rate}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Order summary</strong></h3>
+                </div>
+                <div class="panel-body" style="margin-bottom: 50px;border: 2px solid;">
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>SL NO</th>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Rate</th>
+                                    <th>Tota Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                <tr ng-repeat="invoiceDetail in vm.invoice.invoiceDetails">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{invoiceDetail.itemName}}</td>
+                                    <td>{{invoiceDetail.quantity}}</td>
+                                    <td>{{invoiceDetail.rate}}</td>
+                                    <td>{{invoiceDetail.quantity * invoiceDetail.rate}}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="thick-line" style="text-align:right;">Grand Total</td>
+                                    <td class="thick-line">{{vm.invoice.grandTotal}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align:right;">Pay Amount</td>
+                                    <td>{{vm.invoice.pay}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align:right;">Due Amount</td>
+                                    <td>{{vm.invoice.due}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    .invoice-title h2, .invoice-title h3 {
+        display: inline-block;
+    }
+
+    .table > tbody > tr > .no-line {
+        border-top: none;
+    }
+
+    .table > thead > tr > .no-line {
+        border-bottom: none;
+    }
+
+    .table > tbody > tr > .thick-line {
+        border-top: 2px solid;
+    }
+</style>
