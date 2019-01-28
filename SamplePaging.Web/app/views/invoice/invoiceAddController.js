@@ -43,6 +43,7 @@
                 } else {
                     vm.invoice = data.result;
                     vm.invoiceDetails = data.result.invoiceDetails;
+                    vm.invoice.date = new Date(data.result.date);
                 }
                
             },
@@ -66,7 +67,8 @@
           
         }
         function remove(index) {
-            vm.invoiceDetails.splice(index, 1);
+            vm.index = index;
+            vm.invoiceDetails.splice(vm.index, 1);
             vm.invoice.grandTotal = getTotal();
         };
         function update(index, invoiceDetail) {

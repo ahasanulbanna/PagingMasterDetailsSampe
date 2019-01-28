@@ -111,7 +111,15 @@ namespace SamplePaging.Api.Controllers
             {
                 // Update Invoice
                 db.Entry(existinginvoice).CurrentValues.SetValues(model);
-
+                foreach (var InvoiceDetail in existinginvoice.InvoiceDetails.ToList())
+                {
+                    if (!model.InvoiceDetails.Any(x=>x.InvoiceDetailsId==InvoiceDetail.InvoiceDetailsId))
+                    {               
+                        db.InvoiceDetails.Remove(InvoiceDetail);
+                        db.SaveChanges();
+                    }
+                  
+                }
 
                 foreach (var invoicedetail in model.InvoiceDetails)
                 {
@@ -120,8 +128,16 @@ namespace SamplePaging.Api.Controllers
                         .SingleOrDefault();
 
                     if (existingInvoiceDetail != null)
+                    {
                         // Update InvoiceDetails
-                        db.Entry(existingInvoiceDetail).CurrentValues.SetValues(invoicedetail);                 
+                        db.Entry(existingInvoiceDetail).CurrentValues.SetValues(invoicedetail);
+                    }
+                    else
+                    {
+                        existinginvoice.InvoiceDetails.Add(invoicedetail);
+                    }
+                    db.SaveChanges();
+                                 
                 }
             }
            
